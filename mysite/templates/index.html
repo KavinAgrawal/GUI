@@ -1,0 +1,13 @@
+{% block content %}
+
+    <h1>Register</h1>
+    <form action="" method="POST"> 
+    {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" name="action" value="Up" />
+    <input type="submit" name="action" value="Down" />
+    <input type="submit" name="action" value="Left" />
+    <input type="submit" name="action" value="Right" />
+    </form>
+    {{output}}
+{% endblock %}
