@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from manage import send_msg,execute_file
+from manage import send_msg
 from django.core.exceptions import ValidationError
 
 import sys
@@ -13,10 +13,10 @@ def index(request):
     elif request.method == 'POST':
         # print("Value Rxed")
         # raise ValidationError(request.POST)
-        cd=request.POST['action']
-        print(cd)
-        send_msg("Button Pressed")
-        execute_file("handler")
+        direction=request.POST['action']
+        print(direction)
+        send_msg(direction)
+        # execute_file("handler")
         return render(request,'index.html',{'output': "Success"})
         # return render(request, 'output.html', )
 

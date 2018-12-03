@@ -15,8 +15,8 @@ def send_msg(data):
     global pub
     pub.publish(data)
 
-def execute_file(data):
-    print("Here")
+# def execute_file(data):
+    # print("Here")
     # os.system('python ' +str(data)+'.py')
 
 
