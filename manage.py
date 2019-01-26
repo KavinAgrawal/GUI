@@ -5,7 +5,11 @@ import rospy
 from std_msgs.msg import String
 import signal
 
+<<<<<<< HEAD
 pub = rospy.Publisher('Django_node', String, queue_size=10)
+=======
+pub = rospy.Publisher('chatter', String, queue_size=10)
+>>>>>>> 2eaea023202bb669c51d7d26bcfe9c73b43affad
 rospy.init_node('talker', anonymous=True)
 
 def sigint_handler(signal, frame):

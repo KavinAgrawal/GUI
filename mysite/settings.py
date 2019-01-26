@@ -56,7 +56,11 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': ['/home/kavinubuntu/Desktop/GUI/Django_GUI/mysite/templates/'],
+=======
+        'DIRS': ['/home/kavinubuntu/django-apps/Django2/mysite/templates/'],
+>>>>>>> 2eaea023202bb669c51d7d26bcfe9c73b43affad
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +122,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+<<<<<<< HEAD
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+=======
+
+STATIC_URL = '/static/'
+>>>>>>> 2eaea023202bb669c51d7d26bcfe9c73b43affad

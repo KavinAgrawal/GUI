@@ -20,5 +20,9 @@ from mysite.views import index
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+<<<<<<< HEAD
     url(r'^index/', index, name='index'),
+=======
+    url(r'^index/', index),
+>>>>>>> 2eaea023202bb669c51d7d26bcfe9c73b43affad
 ]
