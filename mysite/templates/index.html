@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<head>
+
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    {% load staticfiles %}
+    <script src="{% static "/js/virtualjoystick.js" %}"></script>
+    
+    <style>
+    body {
+      overflow  : hidden;
+      padding   : 0;
+      margin    : 0;
+      background-color: #BBB;
+    }
+    #info {
+      position  : relative;
+      top   : 0px;
+      width   : 100%;
+      padding   : 5px;
+      text-align  : center;
+    }
+    #info a {
+      color   : #66F;
+      text-decoration : none;
+    }
+    #info a:hover {
+      text-decoration : underline;
+    }
+    #container {
+      width   : 500px;
+      height    : 500px;
+      overflow  : hidden;
+      padding   : 0;
+      margin    : 0%;
+      -webkit-user-select : none;
+      -moz-user-select  : none;
+    }
+    </style>
+</style>
+</head>
+<body>
+<!-- 
+
+ -->{% block content %}
+
+    <h1>GUI</h1>
+    <form action="" method="POST"> 
+    {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" name="action" value="Up" ></input>
+    <input type="submit" name="action" value="Left" ></input>
+    <input type="submit" name="action" value="Down" ></i></input>
+    <input type="submit" name="action" value="Right" ></input>
+    <input type="submit" name="action" value="Ac1_Up" ></input>
+    <input type="submit" name="action" value="Ac1_Down" ></input>
+    <input type="submit" name="action" value="Ac2_Up" ></input>
+    <input type="submit" name="action" value="Ac2_Down" ></input>
+    <input type="submit" name="action" value="Ac3_Up" ></input>
+    <input type="submit" name="action" value="Ac3_Down" ></input>
+    <input type="submit" name="action" value="Ac4_Up" ></input>
+    <input type="submit" name="action" value="Ac4_Down" ></input>
+    <input type="submit" name="action" value="Grip_Up" ></input>
+    <input type="submit" name="action" value="Grip_Down" ></input>    
+    <input type="submit" name="action" value="Stop_All" ></input>
+    </form>
+    {{output}}
+
+<!--   <div class="row server-stream">
+
+        <div id="video_pane" style="margin: auto; border: 1px solid black; display: table;">
+          
+        <object type="application/x-shockwave-flash" id="flash_video_obj" name="flash_video_obj" class="video-display" data="http://192.168.0.109:8080/mjp.swf" width="1024" height="768"><param name="quality" value="high"><param name="bgcolor" value="#cccccc"><param name="allowscriptaccess" value="always"><param name="allowfullscreen" value="true"><param name="flashvars" value="cvideo=/video&amp;video=http://192.168.0.109:8080/video4flash&amp;audio=http://192.168.0.109:8080/audio.wav&amp;twa=http://192.168.0.109:8080//audioin.alaw&amp;mode=Vat&amp;wwidth=1024&amp;wheight=768&amp;debug=true"></object></div>
+  </div>  -->
+  <span id="result"></span>
+  <div id="container" ></div>
+
+  <script>
+      var URL = "{% url 'index' %}";
+    </script>
+  <script>
+      console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+  
+      var joystick = new VirtualJoystick({
+                      mouseSupport: true,
+                      stationaryBase: true,
+                      baseX: 400,
+                      baseY: 400,
+                      limitStickTravel: true,
+                      stickRadius: 50
+                   });
+
+      joystick.addEventListener('touchStart', function(){
+        console.log('down')
+      })
+      joystick.addEventListener('touchEnd', function(){
+        console.log('up')
+      })
+
+      setInterval(function(){
+        var outputEl  = document.getElementById('result');
+        outputEl.innerHTML  = '<b>Result:</b> '
+          + ' dx:'+joystick.deltaX()
+          + ' dy:'+joystick.deltaY()
+          + (joystick.right() ? ' right'  : '')
+          + (joystick.up()  ? ' up'   : '')
+          + (joystick.left()  ? ' left' : '')
+          + (joystick.down()  ? ' down'   : '') 
+      }, 1/30 * 1000);
+
+      setInterval(function (){
+        var data = {'dataX': joystick.deltaX()};
+        $.post(URL, data);
+        // console.log(joystick.pressed());
+      }, 10000);
+
+      
+    </script>
+
+{% endblock %}
+</body>
+</html>
